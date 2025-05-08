@@ -1,0 +1,107 @@
+package tests;
+
+import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.*;
+import org.testng.annotations.Test;
+import utils.DriverUtils;
+
+public class WalletTest extends BaseTest {
+
+    @Test(description = "Complete Create Wallet flow including biometric, notifications, and skip option")
+    public void sampleTest() throws InterruptedException {
+        AppiumDriver driver = DriverUtils.getDriver();
+
+        // Step 0: Click "Create Wallet" button
+        try {
+            WebElement createWalletButton = driver.findElement(
+                    By.xpath("//android.view.View[@resource-id='CreateNewWalletButton']/android.widget.Button")
+            );
+            createWalletButton.click();
+            System.out.println("Clicked Create Wallet button.");
+        } catch (Exception e) {
+            System.out.println("Create Wallet button not found.");
+        }
+
+        // Step 1: Tap password input field
+        By passwordInputLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]");
+        WebElement passwordInput = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(passwordInputLocator));
+        passwordInput.click();
+        System.out.println("Tapped password input field.");
+
+        // Step 2: Enter password "111111"
+        By oneDigitLocator = By.xpath("//android.widget.TextView[@text='1']");
+        for (int i = 0; i < 6; i++) {
+            WebElement oneKey = new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(oneDigitLocator));
+            oneKey.click();
+            Thread.sleep(200);
+        }
+        System.out.println("Entered password: 111111");
+
+        // Step 3: Confirm password "111111"
+        for (int i = 0; i < 6; i++) {
+            WebElement oneKey = new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(oneDigitLocator));
+            oneKey.click();
+            Thread.sleep(200);
+        }
+        System.out.println("Confirmed password: 111111");
+
+        // Step 4: Click Biometric Login button
+        By biometricLoginButtonLocator = By.xpath("//android.view.ViewGroup/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
+        WebElement biometricButton = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(biometricLoginButtonLocator));
+        biometricButton.click();
+        System.out.println("Clicked Biometric Login button.");
+
+        // Step 5: Click "Allow" on biometric permission dialog (optional)
+        try {
+            By allowBiometricLocator = By.xpath("//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_allow_button']");
+            WebElement allowButton = new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(allowBiometricLocator));
+            allowButton.click();
+            System.out.println("Clicked 'Allow' on biometric permission dialog.");
+        } catch (Exception e) {
+            System.out.println("'Allow' button for biometric permission not found.");
+        }
+
+        // Step 6: Click Enable Notification button
+        try {
+            By enableNotificationButtonLocator = By.xpath("//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.Button");
+            WebElement enableNotificationButton = new WebDriverWait(driver, 10)
+                    .until(ExpectedConditions.elementToBeClickable(enableNotificationButtonLocator));
+            enableNotificationButton.click();
+            System.out.println("Clicked 'Enable Notification' button.");
+        } catch (Exception e) {
+            System.out.println("'Enable Notification' button not found or not clickable.");
+        }
+
+        // Step 7: Click "Allow" on notification permission dialog
+        try {
+            By allowNotificationLocator = By.xpath("//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_allow_button']");
+            WebElement allowNotificationButton = new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(allowNotificationLocator));
+            allowNotificationButton.click();
+            System.out.println("Clicked 'Allow' on notification permission dialog.");
+        } catch (Exception e) {
+            System.out.println("'Allow' button for notifications not found.");
+        }
+
+        // Step 8: Click "Skip, I'll do it later"
+        try {
+            By skipLaterLocator = By.xpath("//android.widget.TextView[@text=\"Skip, I'll do it later\"]");
+            WebElement skipLaterButton = new WebDriverWait(driver, 5)
+                    .until(ExpectedConditions.elementToBeClickable(skipLaterLocator));
+            skipLaterButton.click();
+            System.out.println("Clicked 'Skip, I'll do it later'.");
+        } catch (Exception e) {
+            System.out.println("'Skip, I'll do it later' button not found.");
+        }
+    }
+}
+
+
+

@@ -1,0 +1,42 @@
+package utils;
+
+import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class DriverUtils {
+
+    private static AppiumDriver driver;
+
+    public static void initializeDriver() {
+        // Set up the driver for Appium, using UiAutomator2 for Android
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("deviceName", "A54J023428003786");
+        capabilities.setCapability("app", System.getProperty("user.dir") + "\\\\..\\\\latest.apk");
+       // capabilities.setCapability("app", "C:\\Projects\\sample-mobile-framework-main/latest.apk");  // Add the app APK path here
+        capabilities.setCapability("appPackage", "com.wallet.crypto.trustapp");
+        capabilities.setCapability("appActivity", "com.wallet.crypto.trustapp.ui.app.AppActivity");
+
+
+        capabilities.setCapability("automationName", "UiAutomator2");
+        capabilities.setCapability("newCommandTimeout", 120);  // Set timeout to 120 seconds
+        capabilities.setCapability("uiautomator2ServerLaunchTimeout", 1200000);
+        try {
+            driver = new AppiumDriver(new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static AppiumDriver getDriver() {
+        return driver;
+    }
+
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}

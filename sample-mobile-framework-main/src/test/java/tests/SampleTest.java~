@@ -1,0 +1,46 @@
+package tests;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import io.appium.java_client.AppiumDriver;
+import org.testng.annotations.Test;
+import utils.DriverUtils;
+
+import java.time.Duration;
+
+public class SampleTest extends BaseTest {
+
+    @Test(description = "Test Create Wallet functionality")
+    public void sampleTest() {
+        // Step 1: Locate and tap the "Create Wallet" button
+       // WebElement createWalletButton = DriverUtils.getDriver().findElement(By.id("com.trustwallet:id/create_wallet_button"));
+        //android.view.View[@resource-id="CreateNewWalletButton"]/android.widget.Button
+        //createWalletButton.click();
+
+        // Step 2: Wait for the password field to be clickable and fill in necessary fields
+        FluentWait<AppiumDriver> wait = new FluentWait<>((AppiumDriver) DriverUtils.getDriver())
+                .withTimeout(Duration.ofSeconds(1000))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(Exception.class);
+
+        // Wait for the password field to be clickable, then enter password
+//        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.trustwallet:id/password_field")));
+//        passwordField.clear();  // Clear any pre-filled value
+//        passwordField.sendKeys("TestPassword123");  // Send the password text
+//
+//        // Wait for the confirm password field to be clickable, then enter the password
+//        WebElement confirmPasswordField = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.trustwallet:id/confirm_password_field")));
+//        confirmPasswordField.clear();  // Clear any pre-filled value
+//        confirmPasswordField.sendKeys("TestPassword123");  // Send the confirmation password text
+//
+//        // Step 3: Tap on "Create Wallet" (if button is available after filling out the form)
+//        WebElement createButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.trustwallet:id/create_wallet_button")));
+//        createButton.click();
+//
+//        // Step 4: Verify wallet creation is successful (this could be based on a success message)
+//        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.trustwallet:id/success_message")));
+//        assert successMessage.isDisplayed() : "Wallet creation failed!";
+    }
+}

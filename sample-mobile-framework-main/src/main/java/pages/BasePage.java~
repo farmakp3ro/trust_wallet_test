@@ -1,0 +1,47 @@
+package pages;
+
+import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class BasePage {
+
+   // protected AppiumDriver driver;
+
+    // Constructor to initialize the AppiumDriver
+    public BasePage(AppiumDriver driver) {
+       // this.driver = driver;
+        //PageFactory.initElements(driver, this);  // Initializes PageFactory elements
+
+        // Set the path to ChromeDriver (relative path to project directory)
+        String chromeDriverPath = "drivers" + System.getProperty("file.separator") + "chromedriver.exe";
+
+        // Set the system property dynamically
+        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+
+
+        WebDriverWait wait = new WebDriverWait(driver, 10); // 10 seconds timeout
+       // WebElement createWalletButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("com.trustwallet:id/create_wallet_button")));
+        //createWalletButton.click();
+
+        // Initialize ChromeDriver
+        //WebDriver driver = new ChromeDriver();
+
+        // Open a website
+        //driver.get("https://www.example.com");
+
+    }
+
+    // You can now use AppiumDriver methods like findElement
+//    public WebElement findElementById(String id) {
+//        return driver.findElementById(id);
+//    }
+}
+
+
+
